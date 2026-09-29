@@ -19,7 +19,8 @@ public class AccountService {
     }
 
     public boolean isLowBalance(String accountNumber) {
-        Account account = accountRepository.findByAccountNumber(accountNumber).get();
-        return account.getBalance().doubleValue() < 100;
+        Account account = accountRepository.findByAccountNumber(accountNumber)
+                .orElseThrow(() -> new NoSuchElementException("No account found: " + accountNumber));
+        return account.getBalance().compareTo(java.math.BigDecimal.valueOf(100)) < 0;
     }
 }
