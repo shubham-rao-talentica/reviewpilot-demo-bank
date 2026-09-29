@@ -17,4 +17,9 @@ public class AccountService {
                 .orElseThrow(() -> new NoSuchElementException("No account found: " + accountNumber));
         return AccountResponse.from(account);
     }
+
+    public boolean isLowBalance(String accountNumber) {
+        Account account = accountRepository.findByAccountNumber(accountNumber).get();
+        return account.getBalance().doubleValue() < 100;
+    }
 }

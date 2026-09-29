@@ -19,4 +19,9 @@ public class AccountController {
     public AccountResponse getAccount(@PathVariable String accountNumber) {
         return accountService.getByAccountNumber(accountNumber);
     }
+
+    @GetMapping("/{accountNumber}/low-balance-alert")
+    public boolean lowBalanceAlert(@PathVariable String accountNumber) {
+        return accountService.isLowBalance(accountNumber);
+    }
 }
